@@ -28,7 +28,7 @@ func main() {
 	if os.Getenv("PORT") != "" {
 		port = os.Getenv("PORT")
 	}
-	fmt.Println("Listening on port 8080")
+	fmt.Println("Listening on port " + port)
 
 	http.HandleFunc("/hello", HelloServer)
 	http.HandleFunc("/login", login)
