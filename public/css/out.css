@@ -1,0 +1,37 @@
+/*
+Error: Inconsistent indentation: 5 spaces were used for indentation, but the rest of the document was indented using 4 spaces.
+        on line 30 of style.css
+
+25:     height: auto;
+26:     padding: 10px;
+27: @include box-sizing(border-box);
+28: 
+29: &:focus {
+30:      z-index: 2;
+31:  }
+32: }
+33: 
+34: body {
+35:     background: url(http://i.imgur.com/GHr12sH.jpg) no-repeat center center fixed;
+
+Backtrace:
+style.css:30
+/usr/local/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:486:in `block in tabulate'
+/usr/local/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:444:in `each'
+/usr/local/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:444:in `each_with_index'
+/usr/local/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:444:in `tabulate'
+/usr/local/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:409:in `_to_tree'
+/usr/local/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+/usr/local/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:298:in `render_with_sourcemap'
+/usr/local/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/sass_scss.rb:391:in `run'
+/usr/local/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/sass_scss.rb:63:in `process_result'
+/usr/local/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/base.rb:52:in `parse'
+/usr/local/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/base.rb:19:in `parse!'
+/usr/local/lib/ruby/gems/2.3.0/gems/sass-3.4.22/bin/sass:13:in `<top (required)>'
+/usr/local/bin/sass:23:in `load'
+/usr/local/bin/sass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Inconsistent indentation: 5 spaces were used for indentation, but the rest of the document was indented using 4 spaces.\A         on line 30 of style.css\A \A 25:     height: auto;\A 26:     padding: 10px;\A 27: @include box-sizing(border-box);\A 28: \A 29: &:focus {\A 30:      z-index: 2;\A 31:  }\A 32: }\A 33: \A 34: body {\A 35:     background: url(http://i.imgur.com/GHr12sH.jpg) no-repeat center center fixed;"; }
