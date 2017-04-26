@@ -12,9 +12,12 @@ import (
 )
 
 var masterKey string
+var databaseHost string
 var store *sessions.CookieStore
 
 func main() {
+
+	databaseHost = "docker"
 
 	key, err := getMasterKey()
 	if err != nil {
