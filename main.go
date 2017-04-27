@@ -12,7 +12,6 @@ import (
 )
 
 var masterKey string
-var databaseHost string
 var store *sessions.CookieStore
 
 func main() {
