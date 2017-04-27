@@ -16,7 +16,7 @@ type User struct {
 
 func insertUser(email, hash string) error {
 
-	db, err := sql.Open("mysql", "root:root@tcp(docker:3306)/SimoniPassword")
+	db, err := sql.Open("mysql", "root:root@/SimoniPassword")
 	if err != nil {
 		return err
 	}
@@ -47,8 +47,7 @@ func insertUser(email, hash string) error {
 func getUser(queryEmail string) User {
 
 	fmt.Println("trying to get the user")
-	//db, err := sql.Open("mysql", "root:rootSimoniPassword")
-	db, err := sql.Open("mysql", "root:root@tcp(docker:3306)/SimoniPassword")
+	db, err := sql.Open("mysql", "root:root@/SimoniPassword")
 	checkErr(err)
 
 	rows, err := db.Query("SELECT * FROM users WHERE email='" + queryEmail + "'")

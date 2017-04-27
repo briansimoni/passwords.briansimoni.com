@@ -17,8 +17,6 @@ var store *sessions.CookieStore
 
 func main() {
 
-	databaseHost = "docker"
-
 	key, err := getMasterKey()
 	if err != nil {
 		panic(errors.New("Unable to read master key"))
