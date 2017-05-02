@@ -596,6 +596,11 @@ jQuery(document).ready(function() {
 			verdictText = verdictText[0];
 
 			if (options.common.debug) { console.log(score + ' - ' + verdictText); }
+			if(score < 35) {
+				$("#create-account-button").attr('disabled', true);
+			} else {
+				$("#create-account-button").attr('disabled', null);
+			}
 
 			if ($.isFunction(options.common.onKeyUp)) {
 				options.common.onKeyUp(event, {

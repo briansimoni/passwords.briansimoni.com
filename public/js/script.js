@@ -4,6 +4,19 @@
 $(document).ready(function() {
 
 
+	// disable the signup form submit button
+	// It will be re-enabled when the user has met password requirements
+	$("#create-account-button").attr('disabled', true);
+	$('#signup-form').submit(function(form) {
+		var firstPassword = document.getElementById('password').value;
+		var confirmPassword = document.getElementById('confirm-password').value;
+		if(firstPassword !== confirmPassword) {
+			console.log(firstPassword + " " + confirmPassword);
+			alert('passwords must match!');
+			form.preventDefault();
+			return false;
+		}
+	});
 
 	var QueryString = function () {
 		// This function is anonymous, is executed immediately and
