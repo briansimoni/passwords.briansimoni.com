@@ -106,6 +106,10 @@ table .glyphicon {
     color: green;
 }
 
+.glyphicon-search {
+    color: blue;
+}
+
 #modal-button {
     float: right;
     padding: 4px 8px;

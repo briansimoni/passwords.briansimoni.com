@@ -12,6 +12,7 @@ type User struct {
 	Email string
 	Hash string
 	Secrets map[string]string
+	PageData map[string]string
 }
 
 func insertUser(email, hash string) error {
@@ -60,7 +61,7 @@ func getUser(queryEmail string) User {
 		var passwordHash string
 		err = rows.Scan(&id, &email, &passwordHash)
 		checkErr(err)
-		user = User{id, email, passwordHash, make(map[string]string, 0)}
+		user = User{id, email, passwordHash, make(map[string]string, 0), make(map[string]string, 0)}
 
 	}
 

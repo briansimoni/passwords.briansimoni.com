@@ -112,15 +112,36 @@ func encrypt(text string) string {
 }
 
 
-func decryptUserSecrets(userSecrets map[string]string) map[string]string {
+// The function called to collect data to do the initial render of the secrets.html page
+// It will decrypt all of the user's applications and display the passwords as ******
+func decryptUserApplications(userSecrets map[string]string) map[string]string {
+	plaintext := make(map[string]string, 0)
+
+	// Decryption happens in memory, never in persistent storage
+	for application, _ := range userSecrets {
+		plaintextApplication := decrypt(application)
+
+		plaintext[plaintextApplication] = "******"
+
+	}
+
+	return plaintext
+}
+
+// Used when a user clicks the magnifying glass
+// Assume's we are passing in a map with decrypted applications
+// Returns the decrypted secret
+func decryptUserSecret(userSecrets map[string]string, requestedApp string) map[string]string {
 	plaintext := make(map[string]string, 0)
 
 	// Decryption happens in memory, never in persistent storage
 	for application, password := range userSecrets {
 		plaintextApplication := decrypt(application)
-		plaintextPassword := decrypt(password)
-
-		plaintext[plaintextApplication] = plaintextPassword
+		if(plaintextApplication == requestedApp) {
+			plaintext[plaintextApplication] = decrypt(password)
+		} else {
+			plaintext[plaintextApplication] = "******"
+		}
 
 	}
 

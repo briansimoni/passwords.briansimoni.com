@@ -74,6 +74,7 @@ func secrets(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "You are not authorized to view this page", http.StatusForbidden)
 		return
 	}
+	requestedApplication := r.URL.Query().Get("app")
 	userEmail := session.Values["userEmail"].(string)
 	user := getUser(userEmail)
 
@@ -84,10 +85,20 @@ func secrets(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user.Secrets = decryptUserSecrets(user.Secrets)
-	err = t.Execute(w, user)  // merge.
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+
+	if len(requestedApplication) != 0 {
+		fmt.Println(requestedApplication)
+		user.PageData = decryptUserSecret(user.Secrets, requestedApplication)
+		err = t.Execute(w, user)  // merge.
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+	} else {
+		user.PageData = decryptUserApplications(user.Secrets)
+		err = t.Execute(w, user)  // merge.
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
 	}
 }
 
