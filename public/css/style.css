@@ -114,3 +114,17 @@ table .glyphicon {
 .alert {
     display: none;
 }
+
+a[href="/logout"] {
+    float: right;
+}
+
+#logout-button {
+    display: inline;
+    margin: 0;
+    margin-right: 10px;
+}
+
+.glyphicon-log-out {
+    float: right;
+}

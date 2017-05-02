@@ -31,6 +31,7 @@ func main() {
 	fmt.Println("Listening on port " + port)
 
 	http.HandleFunc("/login", login)
+	http.HandleFunc("/logout", logout)
 	http.HandleFunc("/signup", signup)
 	http.HandleFunc("/secrets", secrets)
 	http.HandleFunc("/addSecret", addSecret)
@@ -113,6 +114,14 @@ func login(w http.ResponseWriter, r *http.Request) {
 	// Save it before we write to the response/return from the handler.
 	session.Save(r, w)
 	http.Redirect(w, r, "/secrets", http.StatusFound)
+}
+
+func logout(w http.ResponseWriter, r *http.Request) {
+	session, _ := store.Get(r, "simoni-session")
+	delete(session.Values, "authenticated")
+	delete(session.Values, "userEmail")
+	delete(session.Values, "userId")
+	http.Redirect(w, r, "/?status=You have logged out successfully.", http.StatusFound)
 }
 
 func addSecret(w http.ResponseWriter, r *http.Request) {
