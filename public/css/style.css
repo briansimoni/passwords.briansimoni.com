@@ -132,3 +132,11 @@ a[href="/logout"] {
 .glyphicon-log-out {
     float: right;
 }
+
+#success-message {
+    display: none;
+}
+
+#other-message {
+    display: none;
+}

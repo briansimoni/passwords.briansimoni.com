@@ -142,6 +142,16 @@ func addSecret(w http.ResponseWriter, r *http.Request) {
 
 	session, _ := store.Get(r, "simoni-session")
 	userId := session.Values["userId"].(string)
+	user := getUser(session.Values["userEmail"].(string))
+	user.PageData = decryptUserApplications(user.Secrets)
+
+	// duplicate := false
+	for app, _ := range user.PageData {
+		if(app == application) {
+			http.Redirect(w, r, "/secrets?status=failed", http.StatusFound)
+		}
+	}
+
 
 	err := insertSecret(application, password, userId)
 	if err != nil {
