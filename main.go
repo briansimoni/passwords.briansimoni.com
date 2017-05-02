@@ -30,7 +30,6 @@ func main() {
 	}
 	fmt.Println("Listening on port " + port)
 
-	http.HandleFunc("/hello", HelloServer)
 	http.HandleFunc("/login", login)
 	http.HandleFunc("/signup", signup)
 	http.HandleFunc("/secrets", secrets)
@@ -38,21 +37,6 @@ func main() {
 	http.Handle("/", http.FileServer(http.Dir("public")))
 	http.ListenAndServe(":" + port, context.ClearHandler(http.DefaultServeMux))
 }
-
-
-// hello world, the web server
-func HelloServer(w http.ResponseWriter, r *http.Request) {
-
-	session, _ := store.Get(r, "simoni-session")
-	if session.Values["test"] != nil {
-		var value string
-		value = session.Values["test"].(string)
-		fmt.Fprint(w, "this is a database test: " + value)
-	} else {
-		fmt.Fprint(w, "there is nothing in the session")
-	}
-}
-
 
 func signup(w http.ResponseWriter, r *http.Request)  {
 	r.ParseForm()
@@ -122,7 +106,6 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	session, _ := store.Get(r, "simoni-session")
 	// Set some session values.
-	session.Values["authenticated"] = true
 	session.Values["authenticated"] = true
 	session.Values["userEmail"] = email
 	session.Values["userId"] = user.Id

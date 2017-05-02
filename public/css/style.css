@@ -110,3 +110,7 @@ table .glyphicon {
     float: right;
     padding: 4px 8px;
 }
+
+.alert {
+    display: none;
+}
