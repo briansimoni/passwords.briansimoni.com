@@ -9,6 +9,7 @@ import (
 	"errors"
 	"net/url"
 	"html/template"
+	"golang.org/x/net/html"
 )
 
 var masterKey string
@@ -51,7 +52,7 @@ func signup(w http.ResponseWriter, r *http.Request)  {
 	if err != nil {
 		fmt.Println(err.Error())
 		urlParam := url.QueryEscape(err.Error())
-		http.Redirect(w, r, "/?status=" + urlParam, http.StatusFound)
+		http.Redirect(w, r, html.EscapeString("/?status=" + urlParam), http.StatusFound)
 		return
 	}
 
@@ -172,7 +173,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	valid := compareHash(password, user.Hash)
 	if !valid {
 		urlParam := url.QueryEscape("Username or password is incorrect")
-		http.Redirect(w, r, "/?status=" + urlParam, http.StatusFound)
+		http.Redirect(w, r, html.EscapeString("/?status=" + urlParam), http.StatusFound)
 		return
 	}
 
