@@ -193,6 +193,7 @@ func logout(w http.ResponseWriter, r *http.Request) {
 	delete(session.Values, "authenticated")
 	delete(session.Values, "userEmail")
 	delete(session.Values, "userId")
+	session.Save(r, w)
 	http.Redirect(w, r, "/?status=You have logged out successfully.", http.StatusFound)
 }
 
