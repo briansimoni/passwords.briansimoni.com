@@ -135,6 +135,27 @@ func deleteSecretFromDB(app string, user User) error {
 
 }
 
+func updateApplicationPassword(password string, app string, user User) error {
+	db, err := sql.Open("mysql", "root:root@/SimoniPassword")
+	if err != nil {
+		return err
+	}
+
+
+	stmt, err := db.Prepare("UPDATE secrets SET encrypted_password=? WHERE encrypted_application=? AND user_id=?;")
+	if err != nil {
+		return err
+	}
+
+	_, err = stmt.Exec(password, app, user.Id)
+	if err != nil {
+		return err
+	}
+
+	db.Close()
+	return nil
+}
+
 func checkErr(err error) {
 	if err != nil {
 		fmt.Println(err.Error())

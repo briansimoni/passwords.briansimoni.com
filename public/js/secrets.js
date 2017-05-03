@@ -32,8 +32,23 @@ $(document).ready(function() {
 	} else if(QueryString.status === "deleted") {
 		$('#success-message').html("Deleted Successfully.");
 		$('#success-message').show();
+	} else if(QueryString.status === "updated") {
+		$('#success-message').html("Updated Successfully.");
+		$('#success-message').show();
 	} else if(QueryString.status) {
 		$('#other-message').html("That application already exists.");
 		$('#other-message').show();
 	}
+
+
+	$('.glyphicon-pencil').each(function(thing, value) {
+		console.log(value.getAttribute('data-application'));
+		var application = value.getAttribute('data-application');
+		$(this).click(function() {
+			$('#editModal input[type="text"]')[0].placeholder = application;
+			$('#editModal input[type="text"]')[0].value = application;
+			$('#editModal input[type="hidden"]')[0].value = application;
+			$('#editModal input[type="password"]')[0].innerHTML = "";
+		})
+	});
 });

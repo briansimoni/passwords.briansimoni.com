@@ -35,6 +35,7 @@ func main() {
 	http.HandleFunc("/signup", signup)
 	http.HandleFunc("/secrets", secrets)
 	http.HandleFunc("/delete-secret", deleteSecret)
+	http.HandleFunc("/edit-secret", editSecret)
 	http.HandleFunc("/addSecret", addSecret)
 	http.Handle("/", http.FileServer(http.Dir("public")))
 	http.ListenAndServe(":" + port, context.ClearHandler(http.DefaultServeMux))
@@ -127,6 +128,39 @@ func deleteSecret(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.Redirect(w, r, "/secrets?status=deleted", http.StatusFound)
+}
+
+func editSecret(w http.ResponseWriter, r *http.Request) {
+	session, _ := store.Get(r, "simoni-session")
+	if session.Values["authenticated"] != true {
+		http.Error(w, "You are not authorized to view this page", http.StatusForbidden)
+		return
+	}
+	email := session.Values["userEmail"].(string)
+	user := getUser(email)
+
+	r.ParseForm()
+	application := r.Form.Get("application")
+	password := r.Form.Get("password")
+
+	fmt.Println("this is the application " + application)
+	fmt.Println("this is the password " + password)
+
+	var appToEdit string
+	for app, _ := range user.Secrets {
+		if decrypt(app) == application {
+			appToEdit = app
+			break
+		}
+	}
+	err := updateApplicationPassword(encrypt(password), appToEdit, user)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	http.Redirect(w, r, "/secrets?status=updated", http.StatusFound)
+
 }
 
 func login(w http.ResponseWriter, r *http.Request) {
