@@ -114,6 +114,27 @@ func getSecrets(user User) User {
 	return user
 }
 
+func deleteSecretFromDB(app string, user User) error {
+	db, err := sql.Open("mysql", "root:root@/SimoniPassword")
+	if err != nil {
+		return err
+	}
+
+	stmt, err := db.Prepare("DELETE FROM secrets WHERE encrypted_application=? AND user_id=?;")
+	if err != nil {
+		return err
+	}
+
+	_, err = stmt.Exec(app, user.Id)
+	if err != nil {
+		return err
+	}
+
+	db.Close()
+	return nil
+
+}
+
 func checkErr(err error) {
 	if err != nil {
 		fmt.Println(err.Error())

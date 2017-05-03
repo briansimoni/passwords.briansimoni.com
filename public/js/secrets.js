@@ -29,6 +29,9 @@ $(document).ready(function() {
 	if(QueryString.status === "success") {
 		console.log(QueryString.status);
 		$('#success-message').show();
+	} else if(QueryString.status === "deleted") {
+		$('#success-message').html("Deleted Successfully.");
+		$('#success-message').show();
 	} else if(QueryString.status) {
 		$('#other-message').html("That application already exists.");
 		$('#other-message').show();
