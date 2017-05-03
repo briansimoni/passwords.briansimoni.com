@@ -48,7 +48,16 @@ $(document).ready(function() {
 			$('#editModal input[type="text"]')[0].placeholder = application;
 			$('#editModal input[type="text"]')[0].value = application;
 			$('#editModal input[type="hidden"]')[0].value = application;
-			$('#editModal input[type="password"]')[0].innerHTML = "";
 		})
+	});
+
+	$('#generate-button-1').click(function() {
+		var randomstring = Math.random().toString(36).slice(-8);
+		$('#myModal input[type="text"]')[1].value = randomstring
+	});
+
+	$('#generate-button-2').click(function() {
+		var randomstring = Math.random().toString(36).slice(-8);
+		$('#editModal input[type="text"]')[1].value = randomstring
 	});
 });

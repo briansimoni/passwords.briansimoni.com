@@ -8,12 +8,9 @@ import (
 	"fmt"
 	"crypto/aes"
 	"crypto/cipher"
+	"github.com/gorilla/securecookie"
+	"io/ioutil"
 )
-
-
-func base64Encode(data []byte) string {
-	return base64.StdEncoding.EncodeToString(data)
-}
 
 
 
@@ -23,21 +20,13 @@ func generateHash(password string) string {
 		// TODO: Properly handle error
 		fmt.Println(err.Error())
 	}
-	fmt.Println("The new hash: " + string(hash))
-	fmt.Println(password)
-	encodedHash := base64.StdEncoding.EncodeToString([]byte(hash))
-	return string(encodedHash)
+	return string(string(hash))
 }
 
 
 func compareHash(password, hash string) bool {
 
-
-	originalHash, _ := base64.StdEncoding.DecodeString(hash)
-	fmt.Println("original hash: " + string(originalHash))
-	fmt.Println(password)
-
-	if err := bcrypt.CompareHashAndPassword([]byte(originalHash), []byte(password)); err != nil {
+	if err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password)); err != nil {
 		// TODO: Properly handle error
 		fmt.Println(err.Error())
 		return false
@@ -146,4 +135,20 @@ func decryptUserSecret(userSecrets map[string]string, requestedApp string) map[s
 	}
 
 	return plaintext
+}
+
+
+
+func passwordGenerator() string {
+	x := base64.StdEncoding.EncodeToString(securecookie.GenerateRandomKey(32))
+	return x
+}
+
+// need to check that the password is 32 bytes
+func getMasterKey() (string, error){
+	dat, err := ioutil.ReadFile("master-key")
+	if err != nil {
+		return "", err
+	}
+	return string(dat), nil
 }

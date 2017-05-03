@@ -100,14 +100,17 @@ table .glyphicon {
 
 .glyphicon-remove {
     color: red;
+    cursor: pointer;
 }
 
 .glyphicon-pencil {
     color: green;
+    cursor: pointer;
 }
 
 .glyphicon-search {
     color: blue;
+    cursor: pointer;
 }
 
 #modal-button {
@@ -139,4 +142,12 @@ a[href="/logout"] {
 
 #other-message {
     display: none;
+}
+
+.form-control {
+    margin: 8px
+}
+
+#architecture-link {
+
 }
