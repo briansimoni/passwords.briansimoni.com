@@ -7,7 +7,7 @@ Simoni Passwords is a web application designed for secure storage of secret info
 
 ### Design Overview and architecture Diagram
 
-[architecture](https://github.com/briansimoni/passwords.briansimoni.com/blob/master/architecture.png)
+![architecture](https://github.com/briansimoni/passwords.briansimoni.com/blob/master/architecture.png)
 
 ### Operating System
 
