@@ -13,11 +13,11 @@ Simoni Passwords is a web application designed for secure storage of secret info
 
 The application is cross platform ready, but the current production build is deployed on an Ubuntu 16 Linux instance on Amazon Web services Elastic Compute Cloud. Amazon is configured to block all traffic except for ports 443, 80, and 22. (http later is force upgraded to https). The application files themselves are protected with basic Linux file system permissions. The master key has a permissions of 400 and is owned by the “Jenkins” user.
 
-Database
+### Database
 
 The database choice is MySQL and follows a fairly basic security setup. Remote connections are not allowed, and users have only the necessary permissions. Application code utilizes prepared statements to prevent SQL Injection
 
-Web Server
+### Web Server
 
 Apache2 is used as the public facing web server. It will handle all of the connections to ports 80 and 443, and then act as a reverse proxy to the application running on port 8888. Apache also enforces https by automatically redirecting connections to port 80 to port 443.
 
