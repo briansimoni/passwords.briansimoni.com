@@ -20,7 +20,7 @@ func generateHash(password string) string {
 		// TODO: Properly handle error
 		fmt.Println(err.Error())
 	}
-	return string(string(hash))
+	return string(hash)
 }
 
 
@@ -118,7 +118,7 @@ func decryptUserApplications(userSecrets map[string]string) map[string]string {
 }
 
 // Used when a user clicks the magnifying glass
-// Assume's we are passing in a map with decrypted applications
+// Assume's we are passing in a map with decrypted applications (not secrets)
 // Returns the decrypted secret
 func decryptUserSecret(userSecrets map[string]string, requestedApp string) map[string]string {
 	plaintext := make(map[string]string, 0)
