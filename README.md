@@ -21,7 +21,7 @@ The database choice is MySQL and follows a fairly basic security setup. Remote c
 
 Apache2 is used as the public facing web server. It will handle all of the connections to ports 80 and 443, and then act as a reverse proxy to the application running on port 8888. Apache also enforces https by automatically redirecting connections to port 80 to port 443.
 
-Server Side Application Code
+### Server Side Application Code
 
 The application itself is written in Go (https://golang.org/) - an upcoming language created by Google. Go is a compiled, strongly typed language ideal for web, distributed, and concurrent applications. It is additionally garbage collected and safe from buffer overflow attacks since it performs bounds checking. When a user signs up for the application, the bcrypt library is utilized to hash the password with a random salt and add additional computational overhead to prevent viable computation of things like rainbow tables. When users try to authenticate, it will simply hash the provided password and compare the hash to the one stored in the database.
 Encryption is done with AES-256. Both the user’s application names and secrets are encrypted. At no point in time are secrets ever stored in plaintext on persistent storage. Sessions are also encrypted with the same algorithm.
@@ -33,7 +33,7 @@ To speed up the development process, the Jenkins continuous integration server i
 
 ### End user security and experience
 
-The web application provides a sleek design that is responsive to both desktop and mobile phone screen sizes. Since it is on the public internet, it is always at a convenient location for users on any device. On the client side, there is basic form validation to prevent the user from submitting bad requests. It also enforces a strong password, and provides helpful messages when appropriate. All connections made are https to prevent eavesdropping attacks.
+The web application provides a sleek design that is responsive to both desktop and mobile phone screen sizes. Since it is on the public internet, it is always at a convenient location for users on any device. On the client side, there is basic form validation to prevent the user from submitting bad requests. It also enforces a strong password, and provides helpful messages when appropriate. All connections made are https to prevent eavesdropping attacks. When adding new passwords, users also have an option to automatically generate a strong password.
 
 
 
