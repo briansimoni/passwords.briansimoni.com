@@ -33,16 +33,6 @@ CREATE TABLE `secrets` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `secrets`
---
-
-LOCK TABLES `secrets` WRITE;
-/*!40000 ALTER TABLE `secrets` DISABLE KEYS */;
-INSERT INTO `secrets` VALUES (2,'Yw6wdCMI+HGHSzIYbaZjk7bFxmw=','fart','22');
-/*!40000 ALTER TABLE `secrets` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `users`
 --
 
